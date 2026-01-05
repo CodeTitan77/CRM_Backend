@@ -22,6 +22,7 @@ status: {
 },
 tags: {
     type: [String],
+    enum:[ 'High Value', 'Follow-up'],
 },
 timeToClose: {
     type: Number,
