@@ -6,16 +6,11 @@ const LeadRouter=express.Router();
 LeadRouter.put('/leads/:id',async(req,res)=>{
     try{
         const {id}=req.params;
-        const LeadObj= await Lead.findByIdAndUpdate(id,{
-            name:req.body.name,
-            source:req.body.source,
-            salesAgent: req.body.salesAgent, 
-            status: req.body.status,
-            tags: req.body.tags,
-            timeToClose: req.body.timeToClose,
-            priority: req.body.priority,
+        const updatedData=req.body;
+        const LeadObj= await Lead.findByIdAndUpdate(id,
+           updatedData
 
-        },{new:true});
+        ,{new:true}).populate('salesAgent');
         if(!LeadObj){
             return res.status(404).json({message: `Lead with ${id} does not exist`});
         }
@@ -109,6 +104,23 @@ LeadRouter.get('/leads', async(req, res) => {
     catch(error) {
         return res.status(400).json({message: error.message});
     }
+});
+LeadRouter.get('/leads/leadId/:id',async(req,res)=>{
+    try{
+        const {id}=req.params;
+        const data= await Lead.findById(id).populate('salesAgent');
+        return res.status(200).json({
+            message:"data fetched successfully",
+            data:data
+        });
+
+    }
+    catch(error){
+        return res.status(400).json({message: error.message});
+    }
+   
+
+
 });
 LeadRouter.get('/report/last-week',async(req,res)=>{
     try{
