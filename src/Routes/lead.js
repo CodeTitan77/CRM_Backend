@@ -104,7 +104,7 @@ LeadRouter.get('/leads', async(req, res) => {
         
         const leads = await Lead.find(filter).populate('salesAgent', 'name');
         
-        return res.status(201).json(leads);
+        return res.status(201).json({data:leads});
     }
     catch(error) {
         return res.status(400).json({message: error.message});

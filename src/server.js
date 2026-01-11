@@ -3,11 +3,13 @@ const {connectDb} = require('./dbConnect.js');
 const LeadRouter = require('./Routes/lead.js');
 const SalesRouter = require('./Routes/sales.js');
 const CommentRouter = require('./Routes/comment.js');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 connectDb();
 
