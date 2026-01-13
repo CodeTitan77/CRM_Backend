@@ -4,7 +4,7 @@ const Lead = require('../Models/Lead');
 const Sales = require('../Models/SalesAgent');
 const Comment = require('../Models/Comment');
 
-CommentRouter.post('/leads/:id/comments', async(req, res) => {
+CommentRouter.post('/leads/comments/:id', async(req, res) => {
     try {
         const {id} = req.params;
         const leadExists = await Lead.findById(id);
@@ -35,7 +35,7 @@ CommentRouter.post('/leads/:id/comments', async(req, res) => {
     }
 });
 
-CommentRouter.get('/leads/:id/comments', async(req, res) => {
+CommentRouter.get('/leads/comments/:id', async(req, res) => {
     try {
         const {id} = req.params;
         const leadExists = await Lead.findById(id);
